@@ -14,9 +14,16 @@ class ClockFrame extends StatelessWidget {
       decoration:BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(
-          width: 3,
+          width: 10,
           color: AllColors.purple,
         ),
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(1,1),
+            color: AllColors.purple,
+            blurRadius: 20,
+          )
+        ]
       ),
     );
   }

@@ -13,9 +13,9 @@ class DigitalClockFrame extends StatelessWidget {
       alignment: Alignment.center,
       padding: const EdgeInsets.only(bottom: 10),
       height: 80,
-      width: 150,
+      width: 163,
       decoration: BoxDecoration(
-        color: AllColors.darkGreen,
+        color: AllColors.deepPurple,
         borderRadius: BorderRadius.circular(10)
       ),
       child: Column(
@@ -31,7 +31,7 @@ class DigitalClockFrame extends StatelessWidget {
           ),
           RichText(
             text: TextSpan(
-              text: "${time.hourOfPeriod.toString()}:${time.minute}:${dateTime.second} ",
+              text: "${time.hourOfPeriod.toString().padLeft(1, '0')}:${time.minute.toString().padLeft(1, '0')}:${dateTime.second.toString().padLeft(1, '0')} ",
                 style: AllTextStyles.digitClockTextStyle,
               children: [
                 TextSpan(

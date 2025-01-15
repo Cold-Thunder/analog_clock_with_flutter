@@ -11,4 +11,7 @@ class AllTexts{
     static String ten = '10';
     static String elev = '11';
     static String twelve = '12';
+
+    static String setTime =  'Set Time';
+    static String set = 'Set';
 }
