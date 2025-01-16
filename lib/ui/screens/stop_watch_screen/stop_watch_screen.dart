@@ -53,7 +53,7 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
           start = false;
         },
       );
-      if (_timer!.isActive) {
+      if (_timer != null) {
         _timer?.cancel();
       }
     }

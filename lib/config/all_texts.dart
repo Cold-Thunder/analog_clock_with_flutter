@@ -14,4 +14,6 @@ class AllTexts{
 
     static String setTime =  'Set Time';
     static String set = 'Set';
+    static String start = 'Start';
+    static String breakTime = 'Break';
 }

@@ -20,6 +20,12 @@ class AllTextStyles{
         color: AllColors.white,
         fontFamily: "Digital_Clock_mono",
     );
+
+    static TextStyle timerPointTextStyle = TextStyle(
+        fontSize: 40,
+        color: AllColors.white,
+        fontFamily: "Digital_Clock_mono",
+    );
     static TextStyle elevatedTextStyle = TextStyle(
         fontSize: 18,
         color: AllColors.white,

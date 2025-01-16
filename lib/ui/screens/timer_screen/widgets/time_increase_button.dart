@@ -1,5 +1,4 @@
 import 'package:analog_clock/config/all_colors.dart';
-import 'package:analog_clock/config/models/time_changer_model.dart';
 import 'package:flutter/material.dart';
 
 class TimeIncreaseButton extends StatelessWidget {
@@ -14,14 +13,12 @@ class TimeIncreaseButton extends StatelessWidget {
       onTap: (){
         func(index);
       },
-      child: Align(
+      child: Container(
         alignment: Alignment.center,
-        child: SizedBox(
-          height: 50,
-          width: 80,
-          child: Icon(increase ? Icons.arrow_drop_up_rounded
-              :Icons.arrow_drop_down_rounded, size: 60, color: AllColors.white)
-        ),
+        height: 50,
+        width: 80,
+        child: Icon(increase ? Icons.arrow_drop_up_rounded
+            :Icons.arrow_drop_down_rounded, size: 60, color: AllColors.white)
       ),
     );
   }

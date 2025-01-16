@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 class ElevatedButtonDesign extends StatelessWidget {
   final Function func;
   final String title;
-  const ElevatedButtonDesign({required this.func, required this.title, super.key});
+  final Color? color;
+  const ElevatedButtonDesign({this.color, required this.func, required this.title, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class ElevatedButtonDesign extends StatelessWidget {
         func();
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: AllColors.purple,
+        backgroundColor: color ?? AllColors.purple,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
