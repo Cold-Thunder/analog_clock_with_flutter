@@ -23,27 +23,35 @@ class _TimerScreenState extends State<TimerScreen> {
   int hours = 0;
   int milliseconds = 0;
 
+  double progressValue = 1;
+
+
+  late int mainHour = 0;
+  late int mainMin =  0;
+  late int mainSec = 0;
+
   int mainTotalMill = 0;
 
-  double progressValue = 1;
 
 
   timeIncrease(int ind) {
     if (ind == 0 && seconds < 60) {
       setState(() {
         seconds++;
-        milliseconds = 999;
+        mainSec = seconds*1000;
+        mainTotalMill += mainSec;
       });
     } else if (ind == 1 && minutes < 60) {
       setState(() {
         minutes++;
-        milliseconds = 999;
-
+        mainMin =  minutes*60*1000;
+        mainTotalMill += mainMin;
       });
     } else if(ind == 2){
       setState(() {
         hours++;
-        milliseconds = 999;
+        mainHour = hours*60*60*1000;
+        mainTotalMill += mainHour;
       });
     }
   }
@@ -52,14 +60,20 @@ class _TimerScreenState extends State<TimerScreen> {
     if (ind == 0 && seconds > 0) {
       setState(() {
         seconds--;
+        mainSec = seconds*1000;
+        mainTotalMill -= mainSec;
       });
     } else if (ind == 1 && minutes > 0) {
       setState(() {
         minutes--;
+        mainMin =  minutes*60*1000;
+        mainTotalMill -= mainMin;
       });
     } else if (ind == 2 && hours > 0) {
       setState(() {
         hours--;
+        mainHour = hours*60*60*1000;
+        mainTotalMill -= mainHour;
       });
     }
   }
@@ -68,23 +82,28 @@ class _TimerScreenState extends State<TimerScreen> {
   // timer method
   startTimer() {
 
+    print('$mainTotalMill');
 
      if(start == false) {
-        if(hours == 0 && minutes == 0 && seconds ==0){
+
+       // Circular Progress Indicator value controller value
+       setState(() {
+
+         if(mainTotalMill > 0 && progressValue > 0){
+           progressValue = progressValue;
+         }else{
+           // mainTotalMill = mainSec + mainMin + mainHour;
+           progressValue = 1;
+         }
+       });
+
+
+        if(hours == 0 && minutes == 0 && seconds ==0 && milliseconds == 0){
           _timer?.cancel();
           setState(() {
             start = false;
           });
         }else{
-
-
-          seconds -=1;
-
-          int mainHoursMil = hours*60*60*1000;
-          int mainMinMil = minutes*60*1000;
-          int mainSecMil = seconds*1000;
-          mainTotalMill = mainHoursMil + mainMinMil + mainSecMil;
-
 
             _timer = Timer.periodic(Duration(milliseconds: 10), (timer) {
               if(hours == 0 && minutes == 0 && seconds == 0 && milliseconds <=0){
@@ -94,8 +113,16 @@ class _TimerScreenState extends State<TimerScreen> {
                 _timer?.cancel();
               }else{
                 setState(() {
+
                   start = true;
-                  if(milliseconds > 0) {
+
+                  // progress value change
+                  if(mainTotalMill > 0){
+                    progressValue -= 1/(mainTotalMill/10);
+                  }
+
+
+                  // time changer
                     milliseconds -= 10;
                     if (seconds > 0 && milliseconds <= 0) {
                       seconds--;
@@ -108,19 +135,9 @@ class _TimerScreenState extends State<TimerScreen> {
                         minutes = 59;
                       }
                     }
-                  }
                 });
               }
 
-              if(mainTotalMill > 0){
-                int hoursMil = hours*60*60*1000;
-                int minMil = minutes*60*1000;
-                int secMil = seconds*1000;
-                int totalMilliSec = hoursMil + minMil + secMil;
-
-                mainTotalMill >0 ?
-                progressValue = 1 - (1- 0.01) : 0;
-              }
             });
 
         }
